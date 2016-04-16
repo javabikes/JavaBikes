@@ -1,6 +1,6 @@
 package javabikes;
 /** 
- * Represents a bike in the JavaBikes' catalogue. 
+ * Represents a bike in the JavaBikes' catalog. 
  */
 public class Bike {
 	/** 

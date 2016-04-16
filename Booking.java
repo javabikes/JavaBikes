@@ -71,7 +71,7 @@ public class Booking {
 	public static Boolean continueBrowsing() {
 		Scanner input = new Scanner(System.in);
 		String choice;
-		System.out.println("\n\n\t• Continue to browse the bikes catalogue?");
+		System.out.println("\n\n\t§ Continue to browse the bikes catalogue?");
 		System.out.println("\t - Type \"yes\" if you want to see other bikes.");
 		System.out.println("\t - Type \"quit\" to exit the program.");
 		System.out.println("\t - Press enter to book a bike!");
@@ -95,7 +95,7 @@ public class Booking {
 	public static Boolean chooseIfElectric() {
 		Scanner input = new Scanner(System.in);
 		String choice;
-		System.out.println("\n\t• Would you like an electric bike or a normal bike?");
+		System.out.println("\n\t§ Would you like an electric bike or a normal bike?");
 		System.out.println("\t - Type \"1\" if you want an electric bike.");
 		System.out.println("\t - Type \"2\" if you want a normal bike.");
 		System.out.println("\t - Type \"quit\" to exit the program.");
@@ -186,7 +186,7 @@ public class Booking {
 	public static Boolean selectType() {
 		String choice;
 		Scanner input = new Scanner(System.in);
-		System.out.println("\n\t• Check all bikes or select a bike type?");
+		System.out.println("\n\t§ Check all bikes or select a bike type?");
 		System.out.println("\t - Type \"1\" to print all available bikes.");
 		System.out.println("\t - Type \"2\" to select a bike type.");
 
@@ -204,7 +204,7 @@ public class Booking {
 	public static String whichType() {
 		String choice;
 		Scanner input = new Scanner(System.in);
-		System.out.println("\n\t• Select a bike type from the list: ");
+		System.out.println("\n\t§ Select a bike type from the list: ");
 		System.out.println("\t - Type \"m\" to select man's bikes.");
 		System.out.println("\t - Type \"w\" to select woman's bikes.");
 		System.out.println("\t - Type \"k\" to select kids' bikes.");
@@ -260,7 +260,7 @@ public class Booking {
 
 	public static int selectBike(ArrayList<?> arrayBikes) {
 		int ID = 0;
-		System.out.println("\t• Which bike do you want to book? Insert its ID.");
+		System.out.println("\t§ Which bike do you want to book? Insert its ID.");
 		Boolean inputOk = false;
 		System.out.print("\t  ----> ");
 		while (!inputOk) {
@@ -289,7 +289,7 @@ public class Booking {
 		String userInput;
 		Boolean userBoolean;
 		Scanner input = new Scanner(System.in);
-		System.out.println("\n\t• Do you confirm your choice? Enter \"yes\" or \"no\": ");
+		System.out.println("\n\t§ Do you confirm your choice? Enter \"yes\" or \"no\": ");
 		do {
 			System.out.print("\t    ----> ");
 			userInput = input.nextLine().toLowerCase();

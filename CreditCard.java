@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * Represents the credit card used by the customer 
- * to pay for the bike's rent. At the moment, the system
+ * to pay for the bike's rent. Currently, the system
  * accepts only valid MasterCard and Visa cards. 
  */
 public class CreditCard {
@@ -37,7 +37,7 @@ public class CreditCard {
 	 */
 	CreditCard() { 
 		System.out.println("\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("\n\t• Enter your credit card data.");
+		System.out.println("\n\t§ Enter your credit card data.");
 		System.out.println("\t  > Remember: ");
 		System.out.println("\t    - We accept only MasterCard and Visa cards.");
 		System.out.println("\t    - The expiry date must be in format MM/YYYY");

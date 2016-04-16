@@ -95,9 +95,11 @@ public class Customer {
 	}
 
 	/** 
-	 * This method prompts the user to enter his/her name. 
+	 * This method prompts the user to enter his/her name.
+	 * <br>
+	 * <br>
 	 * The input is checked against two different conditions:
-	 * <ul><li>name.length() == 0: the length of the name must 
+	 * <ul><li><code>name.length() == 0</code>: the length of the name must 
 	 * be bigger than zero, in order to exit the <code>do-while</code> loop.</li>
 	 * <li>The name must match the <code>[A-Z][a-z]+</code> regular expression: this
 	 * expression checks if the name has a first capital letter, followed by an indefinite
@@ -109,7 +111,7 @@ public class Customer {
 	 */
 	private String inputName() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t• Enter your first name: ");
+		System.out.println("\t§ Enter your first name: ");
 		do {
 			System.out.print("\t  ----> ");
 			name = input.nextLine();
@@ -118,7 +120,9 @@ public class Customer {
 	}
 
 	/** 
-	 * This method prompts the user to enter his/her surname. 
+	 * This method prompts the user to enter his/her surname.
+	 * <br>
+	 * <br> 
 	 * The input is checked against two different conditions:
 	 * <ul><li><code>surname.length() == 0</code>: the length of the surname must 
 	 * be bigger than zero, in order to exit the <code>do-while</code> loop.</li>
@@ -132,7 +136,7 @@ public class Customer {
 	 */
 	private String inputSurname() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t• Enter your last name: ");
+		System.out.println("\t§ Enter your last name: ");
 		do {
 			System.out.print("\t  ----> ");
 			surname = input.nextLine();
@@ -144,19 +148,21 @@ public class Customer {
 	 * This method asks the user if he/she resides in Denmark. This information 
 	 * is needed because if the customer is resident in Denmark, the document 
 	 * asked will be the CPR number, otherwise it will be the passport number. 
-	 * 
+	 * <br>
+	 * <br>
 	 * The user has to reply "yes" or "no", any other input will result in the 
 	 * do-while's condition evaluating to true, and the loop will be executed again. 
-	 * 
+	 * <br>
+	 * <br>
 	 * Once the user enters a correct input, this input is checked again: if it is "yes", 
-	 * then isDanish will be true, otherwise isDanish will be false. 
+	 * then <code>isDanish</code> will be true, otherwise <code>isDanish</code> will be false. 
 	 * 
 	 * @return          		Boolean.
 	 */
 	private Boolean inputIsDanish() {
 		String danish;
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t• Are you a Danish resident? Enter \"yes\" or \"no\": ");
+		System.out.println("\t§ Are you a Danish resident? Enter \"yes\" or \"no\": ");
 		do {
 			System.out.print("\t  ----> ");
 			danish = input.nextLine().toLowerCase();
@@ -172,31 +178,34 @@ public class Customer {
 	}
 
 	/** 
-	 * This method is used to get the users' document number. 
+	 * This method is used to get the users' document number.
+	 * <br>
+	 * <br> 
 	 * If the customer resides in Denmark, he/she will be asked to enter the 
-	 * CPR number, that will be checked against the \d{6}-\d{4} regular 
+	 * CPR number, that will be checked against the <code>\d{6}-\d{4}</code> regular 
 	 * expression (six digits, a "-" and then 4 digits). Until the user's input
-	 * doesn't match the regular expression, the do-while loop will continue to be 
-	 * executed. 
-	 * 
+	 * doesn't match the regular expression, the <code>do-while</code> loop will 
+	 * continue to be executed. 
+	 * <br>
+	 * <br>
 	 * If the customer does not reside in Denmark, he/she will be asked to enter
 	 * the passport number. In this case, the only condition on the input is that it
 	 * must be longer than 0. Checking if the passport number is valid will be implemented
-	 * in the future, since the great diversity in the format of this numbers leads to 
-	 * implementation problems.
+	 * in the future, since the great diversity in the format of this numbers can lead to 
+	 * implementation bugs, if not done cautiously.
 	 * 
 	 * @return          		String.
 	 */
 	private String inputDocument() {
 		Scanner input = new Scanner(System.in);
 		if (isDanish) {
-			System.out.println("\t• Enter your CPR number, in the xxxxxx-yyyy format: ");
+			System.out.println("\t§ Enter your CPR number, in the xxxxxx-yyyy format: ");
 			do {
 				System.out.print("\t  ----> ");
 				document = input.nextLine();	
 			} while (!document.matches("\\d{6}-\\d{4}"));
 		} else {
-			System.out.println("\t• Enter your passport number: ");
+			System.out.println("\t§ Enter your passport number: ");
 			do {
 				System.out.print("\t  ----> ");
 				document = input.nextLine();
@@ -207,17 +216,21 @@ public class Customer {
 
 	/** 
 	 * This method is used to get the users' e-mail address. 
+	 * <br>
+	 * <br>
 	 * The input is checked against a regular expression, that will evaluate
 	 * whether it is or not a valid email address. 
-	 * 
+	 * <br>
+	 * <br>
 	 * A valid e-mail address is composed only by letters (both uppercase 
 	 * and lowercase), numbers and some symbols (only ".", "_" or "-"). It
 	 * then has a "@" symbol, followed by the domain. The domain must be composed
 	 * by at least two strings, with a "." between them. The first string can have
 	 * both letters, numbers and the "-" symbol, while the last string must have only 
 	 * letters, and at least two of them.
-	 * 
-	 * The regex can be divided as follows: 
+	 * <br>
+	 * <br>
+	 * The regular expression can be divided as follows: 
 	 * <ul><li><code>[_A-Za-z0-9-\\+]+</code> it must start with a string with only letters,
 	 * numbers and some symbols.</li>
 	 * <li><code>(\\.[_A-Za-z0-9-]+)*</code> same as before, it is an optional (because of the *) substring; 
@@ -234,7 +247,7 @@ public class Customer {
 	 */
 	private String inputEmail() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t• Enter your email address: ");
+		System.out.println("\t§ Enter your email address: ");
 		do {
 			System.out.print("\t  ----> ");
 			email = input.nextLine();

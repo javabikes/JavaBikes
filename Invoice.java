@@ -38,7 +38,7 @@ public class Invoice {
 		TimeString = timeformat.format(time);
 		
 		invoice += "\t ---------------------------------------------\n";
-		invoice += "\t\t    •  WELCOME TO JAVABIKES  •  \n";
+		invoice += "\t\t    §  WELCOME TO JAVABIKES  §  \n";
 		invoice += "\t ---------------------------------------------\n\n";
 		invoice += "\t\t\t~~ BIKE INFO ~~\n";
 		invoice += String.format("\t\tBike Type:            %9s\n", currentBike.getBikeTypeString());

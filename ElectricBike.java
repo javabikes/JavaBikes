@@ -1,7 +1,7 @@
 package javabikes;
 
 /**
- * Represents an ElectricBike in the JavaBikes' catalogue. 
+ * Represents an ElectricBike in the JavaBikes' catalog. 
  * The ElectricBike class inherits all its fields from 
  * the Bike class, and adds some battery-related informations.
  *
