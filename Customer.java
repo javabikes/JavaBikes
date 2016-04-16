@@ -1,7 +1,7 @@
 package javabikes;
 import java.util.Scanner;
 /**
- * This class represents the current customer of the 
+ * This class represents a customer of the 
  * JavaBikes self-service rental bike system. 
  */
 public class Customer { 
@@ -35,7 +35,6 @@ public class Customer {
 	 * Contructor of the <code>Customer</code> object. This constructor
 	 * takes zero parameters, and uses some methods that will prompt the 
 	 * user to enter its info.
-	 * 
 	 */	
 	Customer() { 
 		name = inputName(); 
@@ -121,7 +120,7 @@ public class Customer {
 	/** 
 	 * This method prompts the user to enter his/her surname. 
 	 * The input is checked against two different conditions:
-	 * <ul><li>surname.length() == 0: the length of the surname must 
+	 * <ul><li><code>surname.length() == 0</code>: the length of the surname must 
 	 * be bigger than zero, in order to exit the <code>do-while</code> loop.</li>
 	 * <li>The surname must match the <code>[A-Z][a-z]+</code> regular expression: this
 	 * expression checks if the surname has a first capital letter, followed by an indefinite

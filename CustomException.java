@@ -1,5 +1,7 @@
 package javabikes;
-
+/**
+ * A dummy exception. 
+ */
 public class CustomException extends Exception
 {
     //Parameterless Constructor
