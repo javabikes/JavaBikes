@@ -90,6 +90,8 @@ public class CreditCard {
 	/** 
 	 * This methods prompts the user to enter the number of 
 	 * the credit card he/she wishes to use for the payment. 
+	 * <br>
+	 * <br>
 	 * The input is checked twice:
 	 * <ul><li>In order to exit the inner do-while loop, the 
 	 * input must be composed only by a fixed number of digits. 
@@ -100,7 +102,7 @@ public class CreditCard {
 	 * <code>checkCardNumber(cardNumber)</code> is explained below; 
 	 * it returns true if the number is valid, otherwise
 	 * it returns false</li></ul>
-	 * 
+	 * <br>
 	 * The only other input that is accepted is the string "quit". 
 	 * If the user enters this string, the booking is aborted and
 	 * the program terminates. 
@@ -127,6 +129,8 @@ public class CreditCard {
 	/** 
 	 * This methods prompts the user to enter the expiry date of 
 	 * the credit card he/she wishes to use for the payment. 
+	 * <br>
+	 * <br>
 	 * The input is checked twice:
 	 * <ul><li>In order to exit the inner do-while loop, the 
 	 * input must respect the fixed expiry date format: it is checked
@@ -139,13 +143,14 @@ public class CreditCard {
 	 * and year) and they are checked against the current month and year,
 	 * received from the Calendar object. If the date is valid, the 
 	 * <code>dateChecker</code> variable will be set to true.</li></ul>
-	 * 
+	 * <br>
 	 * A remark: the outer do-while loop would be satisfied also with a 
-	 * date such as 18/2020, but months must be between 1 and 12; in order
+	 * date such as 18/2020, but months exist only between 1 and 12; in order
 	 * to avoid any possible errors, the outer do-while loop exits only if 
 	 * <code>dateChecker</code> is true AND the month is not bigger or equal
 	 * to 12. 
-	 * 
+	 * <br>
+	 * <br>
 	 * The only other input that is accepted is the string "quit". 
 	 * If the user enters this string, the booking is aborted and
 	 * the program terminates. 
@@ -186,11 +191,13 @@ public class CreditCard {
 	/** 
 	 * This methods prompts the user to enter the CVV code of 
 	 * the credit card he/she wishes to use for the payment. 
-	 * 
+	 * <br>
+	 * <br>
 	 * The CVV code does not have a fixed template or style: the 
 	 * only condition that the input must satisfy in order to be 
 	 * valid is that it must be composed by three digits. 
-	 * 
+	 * <br>
+	 * <br>
 	 * The only other input that is accepted is the string "quit". 
 	 * If the user enters this string, the booking is aborted and
 	 * the program terminates. 
@@ -217,6 +224,8 @@ public class CreditCard {
 	 * <code>for</code> loop. The loop is executed 31 times (just because
 	 * this number fits the width of the other output of the program); each 
 	 * time it is executed, it prints out a "=" and then it stops for 75 milliseconds. 
+	 * <br>
+	 * <br>
 	 * If the <code>Thread.sleep()</code> is interrupted, it will raise an 
 	 * exception that is being cought; this exception will cause the payment
 	 * to be aborted, and the program to exit. 
@@ -245,10 +254,11 @@ public class CreditCard {
 	 * (MasterCard). Moreover, the number of a credit card is not 
 	 * random: it must be checked against the Luhn's algorithm, that 
 	 * can detect single-digits errors and almost all transposition
-	 * of adjacent digits. 
-	 * 
+	 * of adjacent digits.
+	 * <br>
+	 * <br>
 	 * To check if a card number satisfies the Luhn's algorithm, the 
-	 * process is fairly simple: 
+	 * process is fairly simple:
 	 * <ul><li>Reverse the number: first line of the method.</li>
 	 * <li>Sum all the odd digits: <code>sumOdd += currentDigit</code>.</li>
 	 * <li>Multiply each even digit by two; if the result is greater 
@@ -257,17 +267,21 @@ public class CreditCard {
 	 * sum is stored in the <code>sumEven</code> variable. </li>
 	 * <li>Only if the sum of <code>sumOdd</code> and <code>sumEven</code> can be
 	 * divided by 10, the number is valid.</li></ul>
+	 * <br>
 	 * If the number is valid, <code>validNumber</code> will be true, otherwise, 
 	 * it will be false.
-	 * 
+	 * <br>
+	 * <br>
 	 * To check if the card is a valid MasterCard or Visa, it is enough 
 	 * to check the first one or two digits of it:
 	 * <ul><li>If the first digit is a "4", it is a valid Visa card.</li>
-	 * <li>If the is a "5", then the second digit must be checked, and it
+	 * <li>If the first digit is a "5", then the second digit must be checked, and it
 	 * must be equal to a number between 1 and 5.</li></ul>
+	 * <br>
 	 * If the number starts with a the right digit, <code>validVisaOrMc</code>
 	 * will be true, otherwise it will be false. 
-	 * 
+	 * <br>
+	 * <br>
 	 * This method will return true if and only if the number satisfies the 
 	 * Luhn's algorithm AND it is a MasterCard or Visa card: 
 	 * <code>return validNumber AND validVisaOrMc</code>.
