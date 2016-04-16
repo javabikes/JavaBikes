@@ -79,7 +79,7 @@ public class Booking {
 	 * bike or a normal bike.
 	 * <br>
 	 * <br>
-	 * The input is checked: 
+	 * The input can be: 
 	 * <ul><li>"1": input accepted, the customer chose
 	 * to see electric bikes.</li>
 	 * <li>"2": input accepted, the customer chose to see
@@ -96,7 +96,10 @@ public class Booking {
 	 * also terminate the program, if the user wants to. 
 	 * 
 	 * 
-	 * @return 		Boolean
+	 * @return Boolean				a Boolean value, that is true if the 
+	 * 								user wants to see electric bikes, it
+	 * 								is false if the user wants to see normal
+	 * 								bikes. 
 	 */
 	public static Boolean chooseIfElectric() {
 		Scanner input = new Scanner(System.in);
@@ -126,7 +129,7 @@ public class Booking {
 	 * already chose a bike and can move on, to book it. 
 	 * <br>
 	 * <br>
-	 * The input is checked: 
+	 * The input can be: 
 	 * <ul><li>"yes": input accepted, it will lead to 
 	 * the execution of the first <code>case</code> statement in
 	 * the <code>switch</code> block.</li>
@@ -144,7 +147,11 @@ public class Booking {
 	 * false</code>, depending on the user's wishes. It can
 	 * also terminate the program, if the user wants to. 
 	 * 
-	 * @return 		Boolean
+	 * @return Boolean				a Boolean value, that is true if the 
+	 * 								user wants to continue to browse
+	 * 								the bikes' catalog, otherwise it will
+	 * 								be false.
+	 * 
 	 */
 	public static Boolean continueBrowsing() {
 		Scanner input = new Scanner(System.in);
@@ -203,7 +210,7 @@ public class Booking {
 	 * is created. <code>newBike</code> is then added to the ArrayList, 
 	 * through the <code>add(newBike)</code> method. 
 	 *  
-	 * @return			ArrayList of Bike objects. 
+	 * @return arrayBikes				ArrayList of Bike objects. 
 	 * @throws IOException
 	 */
 	public static ArrayList<Bike> getBikes() throws IOException {
@@ -262,7 +269,7 @@ public class Booking {
 	 * is created. <code>newBike</code> is then added to the ArrayList, 
 	 * through the <code>add(newBike)</code> method. 
 	 *  
-	 * @return			ArrayList of ElectricBike objects. 
+	 * @return arrayBikes			ArrayList of ElectricBike objects. 
 	 * @throws IOException
 	 */
 	public static ArrayList<ElectricBike> getElectricBikes() throws IOException {
@@ -315,7 +322,7 @@ public class Booking {
 	 * bikes), or if he/she wants to browse all bikes. 
 	 * <br>
 	 * <br>
-	 * The input is checked: 
+	 * The input can be: 
 	 * <ul><li>"1": input accepted, the customer wants
 	 * to see all available bikes; the method will return
 	 * false.</li>
@@ -328,7 +335,10 @@ public class Booking {
 	 * This method returns <code>true</code> or <code>
 	 * false</code>, depending on the user's wishes.
 	 * 
-	 * @return 		Boolean
+	 * @return Boolean				a Boolean value, that is true if the 
+	 * 								user wants to select a bike type and
+	 * 								that is false if the user wants to 
+	 * 								see all available bikes.
 	 */
 	public static Boolean selectType() {
 		String choice;
@@ -355,7 +365,7 @@ public class Booking {
 	 * wants to see.  
 	 * <br>
 	 * <br>
-	 * The input is checked: 
+	 * The input can be: 
 	 * <ul><li>"m": input accepted, the customer wants
 	 * to see men's bikes.</li>
 	 * <li>"w": input accepted, the customer wants
@@ -370,7 +380,9 @@ public class Booking {
 	 * or "k"); basically, it is needed only to sanitize the 
 	 * user's input, to prevent unhandled exceptions to occur. 
 	 * 
-	 * @return 		String
+	 * @return choice			a String, it can be "m" or "w"
+	 * 							or "k", depending on the user's 
+	 * 							wishes. 
 	 */
 	public static String whichType() {
 		String choice;
@@ -489,12 +501,53 @@ public class Booking {
 		}
 	}
 
+	/**
+	 * This method is called when the user wants to select a bike.
+	 * <br>
+	 * <br>
+	 * The user has to enter the identification number (ID) of the
+	 * chosen bike. The input must satisfy three conditions: it has
+	 * to be an Integer, it can't be bigger than the size of the 
+	 * ArrayList of bikes and it must be the ID of a bike that is 
+	 * available. 
+	 * <br>
+	 * <br>
+	 * <ul>
+	 * <li>If the input is not an Integer, a <code>InputMismatchException</code>
+	 * is raised and caught; the user will receive a warning message that reminds him/her 
+	 * that the input must be a number.</li>
+	 * <li>If the input is a number higher than the size of the ArrayList of 
+	 * bikes, a <code>IndexOutOfBoundsException</code> is raised and caught; 
+	 * the user will receive a warning message that tells him/her that the entered
+	 * input is too high.</li>
+	 * <li>If the input is a valid ID, but it is the ID of a bike that is not
+	 * available, a <code>CustomException</code> is raised and caught, and the 
+	 * user will be warned that the chosen bike is not available.</li></ul>
+	 * <br>
+	 * <br>
+	 * Each time an exception is thrown and caught, the <code>do-while</code>
+	 * loop will restart, because the <code>inputOk</code> variable is not 
+	 * set to <code>true</code>; this variable will be <code>true</code> if 
+	 * and only if all the three conditions on the input are satisfied. When
+	 * this happens, <code>!inputOk</code> will evaluate to false, and the 
+	 * loop will end. 
+	 * 
+	 * @param arrayBikes 		an ArrayList of generic objects: it uses the ?
+	 * 							notation, so any ArrayList is accepted. This is 
+	 * 							done in order to be able to pass to this method
+	 * 							both an ArrayList of <code>Bike</code> objects 
+	 * 							and an ArrayList of <code>ElectricBike</code> 
+	 * 							objects.	 
+	 * 
+	 * @return ID				an Integer representing the identification code
+	 * 							of the bike that the user selected. 
+	 */
 	public static int selectBike(ArrayList<?> arrayBikes) {
 		int ID = 0;
-		System.out.println("\t§ Which bike do you want to book? Insert its ID.");
 		Boolean inputOk = false;
+		System.out.println("\t§ Which bike do you want to book? Insert its ID.");
 		System.out.print("\t  ----> ");
-		while (!inputOk) {
+		do {
 			try {
 				Scanner input = new Scanner(System.in);
 				ID = input.nextInt();
@@ -513,9 +566,26 @@ public class Booking {
 				System.out.print("\t  ----> Bike not available, choose another one: ");
 				continue;
 			}
-		}		
+		} while (!inputOk);
 		return ID;
 	}
+	
+	
+	/**
+	 * This method asks the user for an active confirm of his/her choices.
+	 * 
+	 * The input can be: 
+	 * <ul>
+	 * <li>"yes": input accepted, the customer confirmed the previous choice</li>
+	 * <li>"no": input accepted, the customer did not confirm the previous choice</li>
+	 * <li>any other input: not accepted, the user will have
+	 * to re-enter something ("yes" or "no")</li>
+	 * </ul>
+	 * 
+	 * @return userBoolean 				a Boolean value, it will be true if the 
+	 * 									user confirmed the previous choice; 
+	 * 									otherwise it will be false. 
+	 */
 	public static Boolean confirmed() {
 		String userInput;
 		Boolean userBoolean;
@@ -534,6 +604,26 @@ public class Booking {
 		return userBoolean;
 	}
 
+	
+	/**
+	 * This method is executed right before charging the user's credit card.
+	 * It asks the user for an active confirm of his/her previous choices: 
+	 * it displays the last four numbers of the user's credit card and the 
+	 * price of the selected bike. If the user confirms the choice, the 
+	 * booking will be completed, unless exceptions occur during the payment. 
+	 * 
+	 * The input can be: 
+	 * <ul>
+	 * <li>"quit": input accepted, the program will abort the current booking and
+	 * will terminate.</li>
+	 * <li>any other input: accepted, the user confirmed the previous choices 
+	 * and his/her credit card will be charged.</li>
+	 * </ul>
+	 * 
+	 * @param name					the name of the customer. 
+	 * @param lastNumbers			last four digits of the customer's credit card.
+	 * @param price					price of the bike chosen by the customer. 
+	 */
 	public static void askLastConfirm(String name, String lastNumbers, int price) {
 		Scanner input = new Scanner(System.in);
 		System.out.println("\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -549,6 +639,37 @@ public class Booking {
 		}
 	}
 
+	
+	/**
+	 * Updates the bikes' database, by removing the bike that the customer just booked.
+	 * This methods checks whether the customer booked a normal bike or an electric bike, 
+	 * and selects the appropriate database ("bikes.txt" or "electricbikes.txt"). It then
+	 * proceeds to update the chosen database.
+	 * <br>
+	 * <br>
+	 * Since it is not possible to change a single value in a single line of a text file,
+	 * the only way to update the bikes' database is the following: 
+	 * <ul>
+	 * <li>Create a new temporary file.</li>
+	 * <li>Copy the content of the old file into the temporary file, line by line</li>
+	 * <li>When the line with the booked bike is about to be copied, the <code>lineNumber 
+	 * == bikeID</code> boolean expression will evaluate to true, and that single line 
+	 * will be modified, through the <code>replace(oldString, newString)</code> method. 
+	 * This method will replace "true" with "false", removing the bike from the available
+	 * bikes</li>
+	 * <li>The lines after the one with the booked bike are copied without modifications.</li>
+	 * <li>The old file is deleted</li>
+	 * <li>The temporary file is renamed, with the same name as the old file; this is needed
+	 * because when the program will restart, it will load bikes from "bikes.txt" or from 
+	 * "electricbikes.txt", and if it can't find one of those two files it will terminate.</li>
+	 * </ul>
+	 * 
+	 * 
+	 * @param electricOrNot				a Boolean value, it is true if the customer booked an
+	 * 									electric bike, otherwise it is false. 
+	 * @param bikeID					the identification number of the booked bike. 
+	 * @throws IOException
+	 */
 	public static void updateBikeDatabase(Boolean electricOrNot, int bikeID) throws IOException {
 		Path workingDirectory = Paths.get("").toAbsolutePath();
 		String dbFile;

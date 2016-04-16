@@ -151,7 +151,7 @@ public class Invoice {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(workingDir + "/javabikes/" + fileName));
 		bw.write(invoice);
 		bw.close();
-		System.out.println("\n\n\n\tThank you! You're invoice is displayed above.");
+		System.out.println("\n\n\n\tThank you! Your invoice is displayed above.");
 		System.out.println("\tIt was also saved in this file: " + fileName);
 	}
 }
