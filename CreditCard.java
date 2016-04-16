@@ -147,8 +147,7 @@ public class CreditCard {
 	 * A remark: the outer do-while loop would be satisfied also with a 
 	 * date such as 18/2020, but months exist only between 1 and 12; in order
 	 * to avoid any possible errors, the outer do-while loop exits only if 
-	 * <code>dateChecker</code> is true AND the month is not bigger or equal
-	 * to 12. 
+	 * <code>dateChecker</code> is true AND the month is not bigger than 12. 
 	 * <br>
 	 * <br>
 	 * The only other input that is accepted is the string "quit". 

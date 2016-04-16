@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Main class of the program. This class guides
+ * the whole user interaction with the system, and 
+ * it calls constructors and methods from other classes
+ * when it is needed. 
+ */
 public class Booking {
 
 	public static void main(String[] args) throws IOException {
@@ -68,6 +74,77 @@ public class Booking {
 	}	
 	
 
+	/**
+	 * This methods asks the user if he/she wants an electric
+	 * bike or a normal bike.
+	 * <br>
+	 * <br>
+	 * The input is checked: 
+	 * <ul><li>"1": input accepted, the customer chose
+	 * to see electric bikes.</li>
+	 * <li>"2": input accepted, the customer chose to see
+	 * normal bikes.</li>
+	 * <li>"quit": input accepted, it will lead to the
+	 * execution of the second <code>case</code> statement in
+	 * the <code>switch</code> block.</li>
+	 * <li>any other input: not accepted, the user will have
+	 * to re-enter something</li></ul>
+	 * <br>
+	 * <br>
+	 * This method returns <code>true</code> or <code>
+	 * false</code>, depending on the user's wishes. It can
+	 * also terminate the program, if the user wants to. 
+	 * 
+	 * @return 		Boolean
+	 */
+	public static Boolean chooseIfElectric() {
+		Scanner input = new Scanner(System.in);
+		String choice;
+		System.out.println("\n\t§ Would you like an electric bike or a normal bike?");
+		System.out.println("\t - Type \"1\" if you want an electric bike.");
+		System.out.println("\t - Type \"2\" if you want a normal bike.");
+		System.out.println("\t - Type \"quit\" to exit the program.");
+		do {
+			System.out.print("\t  ----> ");
+			choice = input.nextLine();
+		} while (!choice.equals("1") && !choice.equals("2") && !choice.equals("quit"));
+		if (choice.equals("1")) {
+			return true;
+		} else if  (choice.equals("2")) {
+			return false;
+		} else {
+			System.out.println("\tSorry to see you go. See you soon!");
+			System.exit(0);
+			return true;
+		}
+	}
+	
+	/**
+	 * This methods asks the user if he/she wants to 
+	 * continue to browse the bike's database, or if he/she
+	 * already chose a bike and can move on, to book it. 
+	 * <br>
+	 * <br>
+	 * The input is checked: 
+	 * <ul><li>"yes": input accepted, it will lead to 
+	 * the execution of the first <code>case</code> statement in
+	 * the <code>switch</code> block.</li>
+	 * <li>"quit": input accepted, it will lead to the
+	 * execution of the second <code>case</code> statement in
+	 * the <code>switch</code> block.</li>
+	 * <li>null: also accepted, it will lead to the execution of
+	 * the <code>default</code> statement in the 
+	 * <code>switch</code> block.</li>
+	 * <li>any other input: not accepted, the user will have
+	 * to re-enter something</li></ul>
+	 * <br>
+	 * <br>
+	 * This method returns <code>true</code> or <code>
+	 * false</code>, depending on the user's wishes. It can
+	 * also terminate the program, if the user wants to. 
+	 * 
+	 * @return 		Boolean
+	 */
 	public static Boolean continueBrowsing() {
 		Scanner input = new Scanner(System.in);
 		String choice;
@@ -91,91 +168,137 @@ public class Booking {
 		}
 	}
 	
-	
-	public static Boolean chooseIfElectric() {
-		Scanner input = new Scanner(System.in);
-		String choice;
-		System.out.println("\n\t§ Would you like an electric bike or a normal bike?");
-		System.out.println("\t - Type \"1\" if you want an electric bike.");
-		System.out.println("\t - Type \"2\" if you want a normal bike.");
-		System.out.println("\t - Type \"quit\" to exit the program.");
-		do {
-			System.out.print("\t  ----> ");
-			choice = input.nextLine();
-		} while (!choice.equals("1") && !choice.equals("2") && !choice.equals("quit"));
-		if (choice.equals("1")) {
-			return true;
-		} else if  (choice.equals("2")) {
-			return false;
-		} else {
-			System.out.println("\tSorry to see you go. See you soon!");
-			System.exit(0);
-			return true;
-		}
-	}
 
+	/**
+	 * This method loads the bike's database into an ArrayList of 
+	 * Bike objects. The bike's database is a comma-delimited
+	 * text file. 
+	 * <br>
+	 * <br>
+	 * ArrayList is used since it can have a variable length: an
+	 * Array has a fixed length, and it would lead to bugs if the 
+	 * amount of bikes in the database changes over time. 
+	 * <br>
+	 * <br>
+	 * When it is executed, it checks the current working
+	 * directory (the root directory of the project) and it
+	 * appends to that "/javabikes/bikes.txt": "/javabikes" is the 
+	 * folder/package in which the "bikes.txt" database file is located. 
+	 * This is needed in order to allow the project to be exported
+	 * and imported on different machines, without having to remap 
+	 * the path to the database file. 
+	 * <br>
+	 * <br>
+	 * Once the file is located, a <code>BufferedReader</code> object
+	 * is created, called <code>reader</code>. A <code>while</code> 
+	 * loop goes through each line of the <code>reader</code>, and it stops 
+	 * only when it finds a blank line: there are no more bikes, the 
+	 * database is completely loaded.
+	 * <br>
+	 * <br>
+	 * Each line of the database is split into an Array of strings,
+	 * and then those values are passed to the <code>Bike</code>'s
+	 * constructor: a <code>Bike</code> object called <code>newBike</code>
+	 * is created. <code>newBike</code> is then added to the ArrayList, 
+	 * through the <code>add(newBike)</code> method. 
+	 *  
+	 * @return			ArrayList of Bike objects. 
+	 * @throws IOException
+	 */
 	public static ArrayList<Bike> getBikes() throws IOException {
-		// create an ArrayList object called arrayBikes
 		ArrayList<Bike> arrayBikes = new ArrayList<Bike>();
-
-		// get the current working directory
 		Path workingDirectory = Paths.get("").toAbsolutePath();
-
-		// get the full path to the bikes' database
 		File path = new File (workingDirectory + "/javabikes/bikes.txt");
-
-		// initialize the file reader
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
-
-		// some temporary variables needed 
 		String line;
 		int tmpId = 0;
-
-		/* read each line of the file, split it into the values array and add a Bike object to
-		 * the bikess array. */
 		while ((line = reader.readLine()) != null) {
-			String[] values = line.split(",");				
-			arrayBikes.add(new Bike(tmpId, values[0], values[1], 
-					Integer.parseInt(values[2]), 
-					Boolean.parseBoolean(values[3]))); 
+			String[] values = line.split(",");
+			Bike newBike = new Bike(tmpId, values[0], values[1], 
+					Integer.parseInt(values[2]), Boolean.parseBoolean(values[3]));
+			arrayBikes.add(newBike); 
 			tmpId += 1;
 		}
-
-		// return the bikes array
 		return arrayBikes;
 	}
+	
+	/**
+	 * This method loads the electric bike's database into an 
+	 * ArrayList of ElectricBike objects. The bike's database 
+	 * is a comma-delimited text file.
+	 * <br>
+	 * <br>
+	 * This method is almost the same as <code>getBikes()</code>,
+	 * with just minor differences due to the different types of 
+	 * object that it deals with.
+	 * <br>
+	 * <br>
+	 * ArrayList is used since it can have a variable length: an
+	 * Array has a fixed length, and it would lead to bugs if the 
+	 * amount of electric bikes in the database changes over time. 
+	 * <br>
+	 * <br>
+	 * When it is executed, it checks the current working
+	 * directory (the root directory of the project) and it
+	 * appends to that "/javabikes/electricbikes.txt": "/javabikes" 
+	 * is the folder/package in which the "electricbikes.txt" 
+	 * database file is located. 
+	 * This is needed in order to allow the project to be exported
+	 * and imported on different machines, without having to remap 
+	 * the path to the database file. 
+	 * <br>
+	 * <br>
+	 * Once the file is located, a <code>BufferedReader</code> object
+	 * is created, called <code>reader</code>. A <code>while</code> 
+	 * loop goes through each line of the <code>reader</code>, and 
+	 * it stops only when it finds a blank line: there are no more 
+	 * electric bikes, the database is completely loaded.
+	 * <br>
+	 * <br>
+	 * Each line of the database is split into an Array of strings,
+	 * and then those values are passed to the <code>ElectricBike</code>'s
+	 * constructor: a <code>ElectricBike</code> object called <code>newBike</code>
+	 * is created. <code>newBike</code> is then added to the ArrayList, 
+	 * through the <code>add(newBike)</code> method. 
+	 *  
+	 * @return			ArrayList of ElectricBike objects. 
+	 * @throws IOException
+	 */
 	public static ArrayList<ElectricBike> getElectricBikes() throws IOException {
-		// create an ArrayList object called arrayBikes
 		ArrayList<ElectricBike> arrayBikes = new ArrayList<ElectricBike>();
-
-		// get the current working directory
 		Path workingDirectory=Paths.get("").toAbsolutePath();
-
-		// get the full path to the bikes' database
 		File path = new File (workingDirectory + "/javabikes/electricbikes.txt");
-
-		// initialize the file reader
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
-
-		// some temporary variables needed 
 		String line;
 		int tmpId = 0;
-
-		/* read each line of the file, split it into the values array and add a Bike object to
-		 * the bikess array. */
 		while ((line = reader.readLine()) != null) {
-			String[] values = line.split(",");				
-			arrayBikes.add(new ElectricBike(tmpId, values[0], values[1], 
-					Integer.parseInt(values[2]), 
-					Boolean.parseBoolean(values[3]),
-					Integer.parseInt(values[4]))); 
+			String[] values = line.split(",");		
+			ElectricBike newBike = new ElectricBike(tmpId, values[0], values[1], 
+					Integer.parseInt(values[2]), Boolean.parseBoolean(values[3]), 
+					Integer.parseInt(values[4]));
+			arrayBikes.add(newBike); 
 			tmpId += 1;
 		}
-
-		// return the bikes array
 		return arrayBikes;
 	}
-
+	
+	
+	/**
+	 * This method is called after the user chose between normal bikes
+	 * and electric bikes. Depending on the <code>selectType()</code> result, 
+	 * it will call the <code>printBikes()</code> method only with the <code>
+	 * arrayBikes</code> parameter, or it will overload that method with the
+	 * result of <code>whichType()</code>. For more details on <code>selectType()
+	 * </code>, <code>printBikes()</code> and <code>whichType</code> methods, see 
+	 * their detailed description. 
+	 * 
+	 * @param arrayBikes 		an ArrayList of generic objects: it uses the ?
+	 * 							notation, so any ArrayList is accepted. This is 
+	 * 							done in order to be able to pass to this method
+	 * 							both an ArrayList of <code>Bike</code> objects 
+	 * 							and an ArrayList of <code>ElectricBike</code> 
+	 * 							objects.
+	 */
 	public static void bikeBrowser(ArrayList<?> arrayBikes) {
 		if (selectType()) {
 			printBikes(arrayBikes, whichType());
@@ -183,6 +306,29 @@ public class Booking {
 			printBikes(arrayBikes);
 		}
 	}
+	
+	
+	/**
+	 * This methods asks the user if he/she wants to 
+	 * browse a specific bike type (men's, women's or kids'
+	 * bikes), or if he/she wants to browse all bikes. 
+	 * <br>
+	 * <br>
+	 * The input is checked: 
+	 * <ul><li>"1": input accepted, the customer wants
+	 * to see all available bikes; the method will return
+	 * false.</li>
+	 * <li>"2": input accepted, the customer wants to select
+	 * a bike type; the method will return true.</li> 
+	 * <li>any other input: not accepted, the user will have
+	 * to re-enter something</li></ul>
+	 * <br>
+	 * <br>
+	 * This method returns <code>true</code> or <code>
+	 * false</code>, depending on the user's wishes.
+	 * 
+	 * @return 		Boolean
+	 */
 	public static Boolean selectType() {
 		String choice;
 		Scanner input = new Scanner(System.in);
@@ -201,6 +347,30 @@ public class Booking {
 			return false;
 		}
 	}
+	
+	
+	/**
+	 * This methods asks the user which type of bikes he/she 
+	 * wants to see.  
+	 * <br>
+	 * <br>
+	 * The input is checked: 
+	 * <ul><li>"m": input accepted, the customer wants
+	 * to see men's bikes.</li>
+	 * <li>"w": input accepted, the customer wants
+	 * to see women's bikes.</li>
+	 * <li>"k": input accepted, the customer wants
+	 * to see kids' bikes.</li>
+	 * <li>any other input: not accepted, the user will have
+	 * to re-enter something</li></ul>
+	 * <br>
+	 * <br>
+	 * This method returns the customer's choice ("m", "w" 
+	 * or "k"); basically, it is needed only to sanitize the 
+	 * user's input, to prevent unhandled exceptions to occur. 
+	 * 
+	 * @return 		String
+	 */
 	public static String whichType() {
 		String choice;
 		Scanner input = new Scanner(System.in);
