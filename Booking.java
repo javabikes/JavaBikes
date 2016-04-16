@@ -95,6 +95,7 @@ public class Booking {
 	 * false</code>, depending on the user's wishes. It can
 	 * also terminate the program, if the user wants to. 
 	 * 
+	 * 
 	 * @return 		Boolean
 	 */
 	public static Boolean chooseIfElectric() {
@@ -288,8 +289,8 @@ public class Booking {
 	 * and electric bikes. Depending on the <code>selectType()</code> result, 
 	 * it will call the <code>printBikes()</code> method only with the <code>
 	 * arrayBikes</code> parameter, or it will overload that method with the
-	 * result of <code>whichType()</code>. For more details on <code>selectType()
-	 * </code>, <code>printBikes()</code> and <code>whichType</code> methods, see 
+	 * result of <code>whichType()</code>. For more details on <code>selectType()</code>,
+	 * <code>printBikes()</code> and <code>whichType()</code> methods, see 
 	 * their detailed description. 
 	 * 
 	 * @param arrayBikes 		an ArrayList of generic objects: it uses the ?
@@ -384,45 +385,105 @@ public class Booking {
 		} while (!choice.equals("m") && !choice.equals("w") && !choice.equals("k"));
 		return choice;
 	}
+	
+	/**
+	 * This methods prints out a table with the available bikes.
+	 * <br>
+	 * <br>
+	 * It receives an ArrayList of generic objects, it checks if those objects
+	 * belong to the ElectricBike class or not. If they do, it will print 
+	 * the ID, color, price, bike type, battery level and km range for each bike,
+	 * only if the bike is available.
+	 * <br>
+	 * <br> 
+	 * If the ArrayList is made of normal bikes, it will act as above, except 
+	 * that it will not print the two last columns (battery level and km range),
+	 * since a normal bike has no battery (and no km range). 
+	 * 
+	 * 
+	 * @param arrayBikes 		an ArrayList of generic objects: it uses the ?
+	 * 							notation, so any ArrayList is accepted. This is 
+	 * 							done in order to be able to pass to this method
+	 * 							both an ArrayList of <code>Bike</code> objects 
+	 * 							and an ArrayList of <code>ElectricBike</code> 
+	 * 							objects.
+	 * 
+	 */
 	public static void printBikes(ArrayList<?> arrayBikes) {
 		System.out.println("\n\n\tAVAILABLE BIKES: \n");		
 
 		if (arrayBikes.get(0) instanceof ElectricBike) {
 			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-9s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
-			for (Object b : arrayBikes) {
-				if (((ElectricBike) b).getIsAvailable()) {
+			for (Object thisObject : arrayBikes) {
+				ElectricBike thisBike = (ElectricBike)thisObject;
+				if (thisBike.getIsAvailable()) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s | %-7s |\n",
-							((ElectricBike) b).getBikeId(), ((ElectricBike) b).getColor(), ((ElectricBike) b).getPrice() + " kr.", 
-							((ElectricBike) b).getBikeTypeString(), ((ElectricBike) b).getBatteryLevel() + " %", ((ElectricBike) b).getKmRange());
+							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", 
+							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange());
 				}
 			}
 		} else {
 			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s |\n", "ID", "Color", "Price", "Bike type");
-			for (Object b : arrayBikes) {
-				if (((Bike) b).getIsAvailable()) {
+			for (Object thisObject : arrayBikes) {
+				Bike thisBike = (Bike)thisObject;
+				if (thisBike.getIsAvailable()) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |\n",
-							((Bike) b).getBikeId(), ((Bike) b).getColor(), ((Bike) b).getPrice() + " kr.", ((Bike) b).getBikeTypeString());
+							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", thisBike.getBikeTypeString());
 				}
 			}
 		}
 	}
+	
+	
+	/**
+	 * Overloads the <code>printBikes(arrayBikes)</code> method; it
+	 * does so by specifying an additional parameter: a <code>String</code> called
+	 * <code>bikeType</code>. It acts almost exactly as <code>printBikes(arrayBikes)</code>,
+	 * but it prints out only the bikes of the specified <code>bikeType</code>. 
+	 * <br>
+	 * <br>
+	 * This method receives an ArrayList of generic objects, it checks if those objects
+	 * belong to the ElectricBike class or not. If they do, it will print 
+	 * the ID, color, price, bike type, battery level and km range for each bike,
+	 * only if the bike is available and if it is of the correct type (men's, women's
+	 * or kids' bike).
+	 * <br>
+	 * <br> 
+	 * If the ArrayList is made of normal bikes, it will act as above, except 
+	 * that it will not print the two last columns (battery level and km range),
+	 * since a normal bike has no battery (and no km range). 
+	 * 
+	 * 
+	 * @param arrayBikes 		an ArrayList of generic objects: it uses the ?
+	 * 							notation, so any ArrayList is accepted. This is 
+	 * 							done in order to be able to pass to this method
+	 * 							both an ArrayList of <code>Bike</code> objects 
+	 * 							and an ArrayList of <code>ElectricBike</code> 
+	 * 							objects.	
+	 * 
+	 * @param bikeType			a String that describes the bikeType that the 
+	 * 							user wants to see. It can be "m", "w" or "k". 
+	 *
+	 */
 	public static void printBikes(ArrayList<?> arrayBikes, String bikeType) {
 		System.out.println("\n\n\tAVAILABLE BIKES: \n");		
 		if (arrayBikes.get(0) instanceof ElectricBike) {
 			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-9s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
-			for (Object b : arrayBikes) {
-				if (((ElectricBike) b).getIsAvailable() && ((ElectricBike) b).getBikeType().equals(bikeType)) {
+			for (Object thisObject : arrayBikes) {
+				ElectricBike thisBike = (ElectricBike)thisObject;
+				if (thisBike.getIsAvailable() && thisBike.getBikeType().equals(bikeType)) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s | %-7s |\n",
-							((ElectricBike) b).getBikeId(), ((ElectricBike) b).getColor(), ((ElectricBike) b).getPrice() + " kr.", 
-							((ElectricBike) b).getBikeTypeString(), ((ElectricBike) b).getBatteryLevel() + " %", ((ElectricBike) b).getKmRange());
+							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", 
+							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange());
 				}
 			}
 		} else {
 			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s |\n", "ID", "Color", "Price", "Bike type");
-			for (Object b : arrayBikes) {
-				if (((Bike) b).getIsAvailable() && ((Bike) b).getBikeType().equals(bikeType)) {
+			for (Object thisObject : arrayBikes) {
+				Bike thisBike = (Bike)thisObject;
+				if (thisBike.getIsAvailable() && thisBike.getBikeType().equals(bikeType)) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |\n",
-							((Bike) b).getBikeId(), ((Bike) b).getColor(), ((Bike) b).getPrice() + " kr.", ((Bike) b).getBikeTypeString());
+							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", thisBike.getBikeTypeString());
 				}
 			}
 		}
