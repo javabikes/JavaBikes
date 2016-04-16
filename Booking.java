@@ -425,13 +425,13 @@ public class Booking {
 		System.out.println("\n\n\tAVAILABLE BIKES: \n");		
 
 		if (arrayBikes.get(0) instanceof ElectricBike) {
-			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-9s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
+			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-8s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
 			for (Object thisObject : arrayBikes) {
 				ElectricBike thisBike = (ElectricBike)thisObject;
 				if (thisBike.getIsAvailable()) {
-					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s | %-7s |\n",
+					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |  %-6s |  %-7s |\n",
 							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", 
-							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange());
+							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange() + " km.");
 				}
 			}
 		} else {
@@ -480,13 +480,13 @@ public class Booking {
 	public static void printBikes(ArrayList<?> arrayBikes, String bikeType) {
 		System.out.println("\n\n\tAVAILABLE BIKES: \n");		
 		if (arrayBikes.get(0) instanceof ElectricBike) {
-			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-9s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
+			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-8s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
 			for (Object thisObject : arrayBikes) {
 				ElectricBike thisBike = (ElectricBike)thisObject;
 				if (thisBike.getIsAvailable() && thisBike.getBikeType().equals(bikeType)) {
-					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s | %-7s |\n",
+					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |  %-6s |  %-7s |\n",
 							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", 
-							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange());
+							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange() + " km.");
 				}
 			}
 		} else {
@@ -554,7 +554,7 @@ public class Booking {
 				if (((Bike)arrayBikes.get(ID)).getIsAvailable()) {
 					inputOk = true;
 				} else {
-					throw new CustomException();
+					throw new Exception();
 				}
 			} catch (InputMismatchException ex) {
 				System.out.print("\t  ----> Enter an integer: ");
@@ -562,7 +562,7 @@ public class Booking {
 			} catch (IndexOutOfBoundsException ex) {
 				System.out.print("\t  ----> ID too big, enter it again: ");
 				continue;
-			} catch (CustomException ex) {
+			} catch (Exception ex) {
 				System.out.print("\t  ----> Bike not available, choose another one: ");
 				continue;
 			}
@@ -658,7 +658,7 @@ public class Booking {
 	 * This method will replace "true" with "false", removing the bike from the available
 	 * bikes</li>
 	 * <li>The lines after the one with the booked bike are copied without modifications.</li>
-	 * <li>The old file is deleted</li>
+	 * <li>The old file is deleted.</li>
 	 * <li>The temporary file is renamed, with the same name as the old file; this is needed
 	 * because when the program will restart, it will load bikes from "bikes.txt" or from 
 	 * "electricbikes.txt", and if it can't find one of those two files it will terminate.</li>
