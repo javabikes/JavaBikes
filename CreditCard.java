@@ -15,19 +15,19 @@ public class CreditCard {
 	 * String, since it is easier to manipulate.
 	 */
 	private String number;
-	
+
 	/**
 	 * Expiry date of the credit card, saved in 
 	 * the MM/YYYY format. 
 	 */
 	private String expiryDate;
-	
+
 	/**
 	 * CVV code of the credit card. 
 	 */
 	private String cvvCode;
-	
-	
+
+
 	/**
 	 * Constructor of the <code>CreditCard</code> object. It 
 	 * prints out some useful informations, and then it 
@@ -85,8 +85,8 @@ public class CreditCard {
 	public String getCvvCode() {
 		return cvvCode;
 	}
-	
-	
+
+
 	/** 
 	 * This methods prompts the user to enter the number of 
 	 * the credit card he/she wishes to use for the payment. 
@@ -146,8 +146,12 @@ public class CreditCard {
 	 * <br>
 	 * A remark: the outer do-while loop would be satisfied also with a 
 	 * date such as 18/2020, but months exist only between 1 and 12; in order
-	 * to avoid any possible errors, the outer do-while loop exits only if 
-	 * <code>dateChecker</code> is true AND the month is not bigger than 12. 
+	 * to avoid any possible errors, the <code>validMonth</code> Boolean 
+	 * variable is used: this variable is true only if the entered month
+	 * is between 1 and 12, otherwise it is false. It results from the 
+	 * <code>month &lt;= 12 AND month &gt;= 0</code> Boolean expression, and it 
+	 * is used as a controlling variable in the <code>if-else if-else if-else</code>
+	 * loop.  
 	 * <br>
 	 * <br>
 	 * The only other input that is accepted is the string "quit". 
@@ -161,10 +165,11 @@ public class CreditCard {
 		String expDate;
 		int month;
 		int year;
+		Boolean dateChecker = false;
+		Boolean validMonth = false;
 		Calendar c = Calendar.getInstance();
 		int yearToday = c.get(Calendar.YEAR);
 		int monthToday = c.get(Calendar.MONTH);
-		Boolean dateChecker = false;
 		do {
 			do {
 				System.out.print("\t  * Expiry Date ----> ");
@@ -176,14 +181,17 @@ public class CreditCard {
 			} while (!expDate.matches("\\d{2}/\\d{4}"));
 			month = Integer.parseInt(expDate.substring(0, 2));
 			year = Integer.parseInt(expDate.substring(3, 7));
-			if (year > yearToday) {
+			validMonth = month <= 12 && month >= 0;
+			if (year > yearToday && validMonth) {
 				dateChecker = true;
-			} else if (year == yearToday && month > monthToday) {
+			} else if (year == yearToday && month > monthToday && validMonth) {
 				dateChecker = true;
+			} else if (!validMonth) {
+				System.out.println("\t    >> Attention: invalid month entered.");
 			} else {
 				System.out.println("\t    >> Attention: this credit card is expired.");
-			}
-		} while (!(month <= 12 && dateChecker));
+			}		
+		} while (!(dateChecker));
 		return expDate;
 	}
 
@@ -245,7 +253,7 @@ public class CreditCard {
 		System.out.println("]  OK!\n");
 	}
 
-	
+
 	/** 
 	 * This methods checks whether the card number is valid. Since
 	 * the programs accepts only valid MasterCard and Visa cards,

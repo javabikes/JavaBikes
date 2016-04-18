@@ -521,7 +521,7 @@ public class Booking {
 	 * the user will receive a warning message that tells him/her that the entered
 	 * input is too high.</li>
 	 * <li>If the input is a valid ID, but it is the ID of a bike that is not
-	 * available, a <code>CustomException</code> is raised and caught, and the 
+	 * available, a generic <code>Exception</code> is raised and caught, and the 
 	 * user will be warned that the chosen bike is not available.</li></ul>
 	 * <br>
 	 * <br>
