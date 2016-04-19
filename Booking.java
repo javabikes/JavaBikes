@@ -37,22 +37,21 @@ public class Booking {
 		Boolean electricOrNot;
 		ArrayList<?> allBikes = null;
 		int bikeID;
+		Boolean confirmation; 
 
 		// print a thank you message
 		System.out.println("\n\tTHANK YOU!\n");
 		System.out.println("\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		do {
-			do {
-				electricOrNot = chooseIfElectric();
-				if (electricOrNot) {
-					allBikes = getElectricBikes();
-					bikeBrowser(allBikes);
-				} else {
-					allBikes = getBikes();
-					bikeBrowser(allBikes);
-				}
-			} while (continueBrowsing());
+			electricOrNot = chooseIfElectric();
+			if (electricOrNot) {
+				allBikes = getElectricBikes();
+				bikeBrowser(allBikes);
+			} else {
+				allBikes = getBikes();
+				bikeBrowser(allBikes);
+			}
 			bikeID = selectBike(allBikes);
 		} while (!confirmed());
 
@@ -60,9 +59,9 @@ public class Booking {
 		CreditCard currentCard = new CreditCard();
 		askLastConfirm(currentCustomer.getName(), currentCard.getHiddenNumber(), currentBike.getPrice());
 		currentCard.makePayment();
-		
+
 		Invoice currentInvoice = new Invoice(currentBike, currentCustomer, currentCard, electricOrNot);
-		
+
 		currentInvoice.printInvoice();
 		currentInvoice.saveInvoice();
 		try {
@@ -72,7 +71,7 @@ public class Booking {
 		}
 
 	}	
-	
+
 
 	/**
 	 * This methods asks the user if he/she wants an electric
@@ -104,7 +103,7 @@ public class Booking {
 	public static Boolean chooseIfElectric() {
 		Scanner input = new Scanner(System.in);
 		String choice;
-		System.out.println("\n\t§ Would you like an electric bike or a normal bike?");
+		System.out.println("\n\t> Would you like an electric bike or a normal bike?");
 		System.out.println("\t - Type \"1\" if you want an electric bike.");
 		System.out.println("\t - Type \"2\" if you want a normal bike.");
 		System.out.println("\t - Type \"quit\" to exit the program.");
@@ -117,12 +116,12 @@ public class Booking {
 		} else if  (choice.equals("2")) {
 			return false;
 		} else {
-			System.out.println("\tSorry to see you go. See you soon!");
+			System.out.println("\tWe hope to see you again! Bye :)");
 			System.exit(0);
 			return true;
 		}
 	}
-	
+
 	/**
 	 * This methods asks the user if he/she wants to 
 	 * continue to browse the bike's database, or if he/she
@@ -153,13 +152,13 @@ public class Booking {
 	 * 								be false.
 	 * 
 	 */
-	public static Boolean continueBrowsing() {
+	public static Boolean confirmed() {
 		Scanner input = new Scanner(System.in);
 		String choice;
-		System.out.println("\n\n\t§ Continue to browse the bikes catalogue?");
-		System.out.println("\t - Type \"yes\" if you want to see other bikes.");
+		System.out.println("\n\t> Do you confirm your choice? ");
+		System.out.println("\t - Type \"yes\" if you confirm your choice.");
+		System.out.println("\t - Type \"no\" if you want to browse again the bike's database.");
 		System.out.println("\t - Type \"quit\" to exit the program.");
-		System.out.println("\t - Press enter to book a bike!");
 		do {
 			System.out.print("\t  ----> ");
 			choice = input.nextLine();
@@ -169,13 +168,13 @@ public class Booking {
 		case "yes": 
 			return true;
 		case "quit": 
-			System.out.println("\tSorry to see you go. See you soon!");
+			System.out.println("\tWe hope to see you again! Bye :)");
 			System.exit(0);
 		default: 
 			return false;
 		}
 	}
-	
+
 
 	/**
 	 * This method loads the bike's database into an ArrayList of 
@@ -229,7 +228,7 @@ public class Booking {
 		}
 		return arrayBikes;
 	}
-	
+
 	/**
 	 * This method loads the electric bike's database into an 
 	 * ArrayList of ElectricBike objects. The bike's database 
@@ -289,8 +288,8 @@ public class Booking {
 		}
 		return arrayBikes;
 	}
-	
-	
+
+
 	/**
 	 * This method is called after the user chose between normal bikes
 	 * and electric bikes. Depending on the <code>selectType()</code> result, 
@@ -314,8 +313,8 @@ public class Booking {
 			printBikes(arrayBikes);
 		}
 	}
-	
-	
+
+
 	/**
 	 * This methods asks the user if he/she wants to 
 	 * browse a specific bike type (men's, women's or kids'
@@ -343,7 +342,7 @@ public class Booking {
 	public static Boolean selectType() {
 		String choice;
 		Scanner input = new Scanner(System.in);
-		System.out.println("\n\t§ Check all bikes or select a bike type?");
+		System.out.println("\n\t> Browse all bikes or select a bike type? (men, women or kids bikes)");
 		System.out.println("\t - Type \"1\" to print all available bikes.");
 		System.out.println("\t - Type \"2\" to select a bike type.");
 
@@ -358,8 +357,8 @@ public class Booking {
 			return false;
 		}
 	}
-	
-	
+
+
 	/**
 	 * This methods asks the user which type of bikes he/she 
 	 * wants to see.  
@@ -387,7 +386,7 @@ public class Booking {
 	public static String whichType() {
 		String choice;
 		Scanner input = new Scanner(System.in);
-		System.out.println("\n\t§ Select a bike type from the list: ");
+		System.out.println("\n\t> Select a bike type from the list: ");
 		System.out.println("\t - Type \"m\" to select man's bikes.");
 		System.out.println("\t - Type \"w\" to select woman's bikes.");
 		System.out.println("\t - Type \"k\" to select kids' bikes.");
@@ -397,7 +396,7 @@ public class Booking {
 		} while (!choice.equals("m") && !choice.equals("w") && !choice.equals("k"));
 		return choice;
 	}
-	
+
 	/**
 	 * This methods prints out a table with the available bikes.
 	 * <br>
@@ -445,8 +444,8 @@ public class Booking {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * Overloads the <code>printBikes(arrayBikes)</code> method; it
 	 * does so by specifying an additional parameter: a <code>String</code> called
@@ -478,7 +477,19 @@ public class Booking {
 	 *
 	 */
 	public static void printBikes(ArrayList<?> arrayBikes, String bikeType) {
-		System.out.println("\n\n\tAVAILABLE BIKES: \n");		
+	switch(bikeType) {
+	case "m":
+		System.out.printf("\n\n\tAVAILABLE MEN BIKES: \n");	
+		break;
+	case "w": 
+		System.out.printf("\n\n\tAVAILABLE WOMEN BIKES: \n");
+		break;
+	case "k":
+		System.out.printf("\n\n\tAVAILABLE KIDS BIKES: \n");		
+		break;
+	default:
+		System.out.printf("\n\n\tAVAILABLE BIKES: \n");		
+	}
 		if (arrayBikes.get(0) instanceof ElectricBike) {
 			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-8s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
 			for (Object thisObject : arrayBikes) {
@@ -545,7 +556,7 @@ public class Booking {
 	public static int selectBike(ArrayList<?> arrayBikes) {
 		int ID = 0;
 		Boolean inputOk = false;
-		System.out.println("\t§ Which bike do you want to book? Insert its ID.");
+		System.out.println("\n\t> Which bike do you want to book? Insert its ID.");
 		System.out.print("\t  ----> ");
 		do {
 			try {
@@ -569,8 +580,8 @@ public class Booking {
 		} while (!inputOk);
 		return ID;
 	}
-	
-	
+
+
 	/**
 	 * This method asks the user for an active confirm of his/her choices.
 	 * 
@@ -586,25 +597,25 @@ public class Booking {
 	 * 									user confirmed the previous choice; 
 	 * 									otherwise it will be false. 
 	 */
-	public static Boolean confirmed() {
-		String userInput;
-		Boolean userBoolean;
-		Scanner input = new Scanner(System.in);
-		System.out.println("\n\t§ Do you confirm your choice? Enter \"yes\" or \"no\": ");
-		do {
-			System.out.print("\t    ----> ");
-			userInput = input.nextLine().toLowerCase();
-		} while (!(userInput.equals("yes")) && !(userInput.equals("no")));	
+	//	public static Boolean confirmed() {
+	//		String userInput;
+	//		Boolean userBoolean;
+	//		Scanner input = new Scanner(System.in);
+	//		System.out.println("\n\t> Do you confirm your choice? Enter \"yes\" or \"no\": ");
+	//		do {
+	//			System.out.print("\t    ----> ");
+	//			userInput = input.nextLine().toLowerCase();
+	//		} while (!(userInput.equals("yes")) && !(userInput.equals("no")));	
+	//
+	//		if (userInput.matches("yes")) {
+	//			userBoolean = true;
+	//		} else {
+	//			userBoolean = false;
+	//		};
+	//		return userBoolean;
+	//	}
 
-		if (userInput.matches("yes")) {
-			userBoolean = true;
-		} else {
-			userBoolean = false;
-		};
-		return userBoolean;
-	}
 
-	
 	/**
 	 * This method is executed right before charging the user's credit card.
 	 * It asks the user for an active confirm of his/her previous choices: 
@@ -634,12 +645,12 @@ public class Booking {
 		System.out.println("\t  - Press enter to continue.");
 		System.out.print("\t    ----> ");
 		if (input.nextLine().equals("quit")) {
-			System.out.println("\tSorry to see you go. See you soon!");
+			System.out.println("\tWe hope to see you again! Bye :)");
 			System.exit(0);
 		}
 	}
 
-	
+
 	/**
 	 * Updates the bikes' database, by removing the bike that the customer just booked.
 	 * This methods checks whether the customer booked a normal bike or an electric bike, 

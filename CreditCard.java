@@ -37,7 +37,7 @@ public class CreditCard {
 	 */
 	CreditCard() { 
 		System.out.println("\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("\n\t§ Enter your credit card data.");
+		System.out.println("\n\t> Enter your credit card data.");
 		System.out.println("\t  > Remember: ");
 		System.out.println("\t    - We accept only MasterCard and Visa cards.");
 		System.out.println("\t    - The expiry date must be in format MM/YYYY");
@@ -117,7 +117,7 @@ public class CreditCard {
 				System.out.print("\t  * Card Number ----> ");
 				cardNumber = input.nextLine();
 				if (cardNumber.equals("quit")) {
-					System.out.println("\tSorry to see you go. See you soon!");
+					System.out.println("\tWe hope to see you again! Bye :)");
 					System.exit(0);
 				}
 			} while (!cardNumber.matches("\\d{16}") && !cardNumber.matches("\\d{13}") && !cardNumber.matches("\\d{19}"));
@@ -175,7 +175,7 @@ public class CreditCard {
 				System.out.print("\t  * Expiry Date ----> ");
 				expDate = input.nextLine();
 				if (expDate.equals("quit")) {
-					System.out.println("\tSorry to see you go. See you soon!");
+					System.out.println("\tWe hope to see you again! Bye :)");
 					System.exit(0);
 				}
 			} while (!expDate.matches("\\d{2}/\\d{4}"));
@@ -218,7 +218,7 @@ public class CreditCard {
 			System.out.print("\t  * CVV Code -------> ");
 			cvvCode = input.nextLine();
 			if (cvvCode.equals("quit")) {
-				System.out.println("\tSorry to see you go. See you soon!");
+				System.out.println("\tWe hope to see you again! Bye :)");
 				System.exit(0);
 			}
 		} while (!cvvCode.matches("\\d{3}"));

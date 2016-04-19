@@ -111,11 +111,11 @@ public class Customer {
 	 */
 	private String inputName() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t§ Enter your first name: ");
+		System.out.println("\t> Enter your first name: ");
 		do {
 			System.out.print("\t  ----> ");
 			name = input.nextLine();
-		} while (name.length() == 0 || !(name.matches("[A-Z][a-z]+")));
+		} while (name.length() == 0);
 		return name;
 	}
 
@@ -136,11 +136,11 @@ public class Customer {
 	 */
 	private String inputSurname() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t§ Enter your last name: ");
+		System.out.println("\t> Enter your last name: ");
 		do {
 			System.out.print("\t  ----> ");
 			surname = input.nextLine();
-		} while (surname.length() == 0 || !(name.matches("[A-Z][a-z]+")));
+		} while (surname.length() == 0);
 		return surname;
 	}
 
@@ -162,7 +162,7 @@ public class Customer {
 	private Boolean inputIsDanish() {
 		String danish;
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t§ Are you a Danish resident? Enter \"yes\" or \"no\": ");
+		System.out.println("\t> Are you a Danish resident? Enter \"yes\" or \"no\": ");
 		do {
 			System.out.print("\t  ----> ");
 			danish = input.nextLine().toLowerCase();
@@ -190,26 +190,26 @@ public class Customer {
 	 * <br>
 	 * If the customer does not reside in Denmark, he/she will be asked to enter
 	 * the passport number. In this case, the only condition on the input is that it
-	 * must be longer than 0. Checking if the passport number is valid will be implemented
-	 * in the future, since the great diversity in the format of this numbers can lead to 
-	 * implementation bugs, if not done cautiously.
+	 * must be made by letters or numbers. Checking if the passport number is valid 
+	 * will be implemented in the future, since the great diversity in the format 
+	 * of this numbers can lead to validation errors, if not done cautiously.
 	 * 
 	 * @return          		String.
 	 */
 	private String inputDocument() {
 		Scanner input = new Scanner(System.in);
 		if (isDanish) {
-			System.out.println("\t§ Enter your CPR number, in the xxxxxx-yyyy format: ");
+			System.out.println("\t> Enter your CPR number, in the xxxxxx-yyyy format: ");
 			do {
 				System.out.print("\t  ----> ");
 				document = input.nextLine();	
 			} while (!document.matches("\\d{6}-\\d{4}"));
 		} else {
-			System.out.println("\t§ Enter your passport number: ");
+			System.out.println("\t> Enter your passport number: ");
 			do {
 				System.out.print("\t  ----> ");
 				document = input.nextLine();
-			} while (document.length() == 0);
+			} while (!document.matches("[a-zA-Z0-9]+"));
 		}
 		return document;
 	}
@@ -247,7 +247,7 @@ public class Customer {
 	 */
 	private String inputEmail() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("\t§ Enter your email address: ");
+		System.out.println("\t> Enter your email address: ");
 		do {
 			System.out.print("\t  ----> ");
 			email = input.nextLine();
