@@ -280,13 +280,15 @@ public class CreditCard {
 	 * <br>
 	 * <br>
 	 * To check if the card is a valid MasterCard or Visa, it is enough 
-	 * to check the first one or two digits of it:
-	 * <ul><li>If the first digit is a "4", it is a valid Visa card.</li>
+	 * to check the first one or two digits of it, and how long the number is:
+	 * <ul><li>If the first digit is a "4" and the number is long 13, 16 or 19
+	 * digits, it is a valid Visa card.</li>
 	 * <li>If the first digit is a "5", then the second digit must be checked, and it
-	 * must be equal to a number between 1 and 5.</li></ul>
+	 * must be equal to a number between 1 and 5; if this is true and the number has 
+	 * 16 digits, it is a valid MasterCard card.</li></ul>
 	 * <br>
-	 * If the number starts with a the right digit, <code>validVisaOrMc</code>
-	 * will be true, otherwise it will be false. 
+	 * If the number starts with the right digit and has the right number
+	 * or digits, <code>validVisaOrMc</code> will be true, otherwise it will be false. 
 	 * <br>
 	 * <br>
 	 * This method will return true if and only if the number satisfies the 
@@ -321,13 +323,17 @@ public class CreditCard {
 			}
 		}
 		validNumber = (sumOdd + sumEven) % 10 == 0;
-		if (cardNumber.startsWith("4")  ||
-				cardNumber.startsWith("51") ||
-				cardNumber.startsWith("52") ||
-				cardNumber.startsWith("53") ||
-				cardNumber.startsWith("54") ||
-				cardNumber.startsWith("55")) {
-			validVisaOrMc = true;
+		if (cardNumber.startsWith("4")) {
+			if (cardNumber.length() == 13 || 
+					cardNumber.length() == 16 ||
+					cardNumber.length() == 19) {
+				validVisaOrMc = true;
+			}
+		} else if (Integer.parseInt(cardNumber.substring(0, 2)) >= 51 &&
+				Integer.parseInt(cardNumber.substring(0, 2)) <= 55) {
+			if (cardNumber.length() == 16) {
+				validVisaOrMc = true;
+			}
 		}
 		return validNumber && validVisaOrMc;
 	}

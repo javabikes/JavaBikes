@@ -3,7 +3,7 @@ package javabikes;
 /**
  * Represents an ElectricBike in the JavaBikes' catalog. 
  * The ElectricBike class inherits all its fields from 
- * the Bike class, and adds some battery-related informations.
+ * the Bike class, and adds some battery-related information.
  *
  */
 public class ElectricBike extends Bike {
@@ -13,7 +13,7 @@ public class ElectricBike extends Bike {
 	private int battery;
 	
     /** 
-     * Contructor of the <code>ElectricBike</code> object. This object
+     * Constructor of the <code>ElectricBike</code> object. This object
      * inherits all the <code>Bike</code> parameters and methods,
      * and then it adds some.
      *

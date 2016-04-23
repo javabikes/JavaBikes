@@ -98,14 +98,9 @@ public class Customer {
 	 * This method prompts the user to enter his/her name.
 	 * <br>
 	 * <br>
-	 * The input is checked against two different conditions:
-	 * <ul><li><code>name.length() == 0</code>: the length of the name must 
-	 * be bigger than zero, in order to exit the <code>do-while</code> loop.</li>
-	 * <li>The name must match the <code>[A-Z][a-z]+</code> regular expression: this
-	 * expression checks if the name has a first capital letter, followed by an indefinite
-	 * amount of letters. This needs to be done in order to force the user to enter
-	 * his/her real name. The regular expression will be changed in the future, to accept
-	 * other legitimate names that are currently reject (such as Ann-Sophie). </li></ul>
+	 * The input is checked against one condition: <code>name.length() == 0</code>,  
+	 * the length of the name must be bigger than zero, in 
+	 * order to exit the <code>do-while</code> loop.
 	 * 
 	 * @return          		String.
 	 */
@@ -122,15 +117,10 @@ public class Customer {
 	/** 
 	 * This method prompts the user to enter his/her surname.
 	 * <br>
-	 * <br> 
-	 * The input is checked against two different conditions:
-	 * <ul><li><code>surname.length() == 0</code>: the length of the surname must 
-	 * be bigger than zero, in order to exit the <code>do-while</code> loop.</li>
-	 * <li>The surname must match the <code>[A-Z][a-z]+</code> regular expression: this
-	 * expression checks if the surname has a first capital letter, followed by an indefinite
-	 * amount of letters. This needs to be done in order to force the user to enter
-	 * his/her real surname. The regular expression will be changed in the future, to accept
-	 * other legitimate surnames that are currently reject (such as o'Brien). </li></ul>
+	 * <br>
+	 * The input is checked against one condition: <code>surname.length() == 0</code>,  
+	 * the length of the surname must be bigger than zero, in 
+	 * order to exit the <code>do-while</code> loop.
 	 * 
 	 * @return          		String.
 	 */
@@ -183,16 +173,16 @@ public class Customer {
 	 * <br> 
 	 * If the customer resides in Denmark, he/she will be asked to enter the 
 	 * CPR number, that will be checked against the <code>\d{6}-\d{4}</code> regular 
-	 * expression (six digits, a "-" and then 4 digits). Until the user's input
+	 * expression (six digits, a "-" and then four digits). Until the user's input
 	 * doesn't match the regular expression, the <code>do-while</code> loop will 
 	 * continue to be executed. 
 	 * <br>
 	 * <br>
 	 * If the customer does not reside in Denmark, he/she will be asked to enter
 	 * the passport number. In this case, the only condition on the input is that it
-	 * must be made by letters or numbers. Checking if the passport number is valid 
+	 * must be made of only letters or numbers. Checking if the passport number is valid 
 	 * will be implemented in the future, since the great diversity in the format 
-	 * of this numbers can lead to validation errors, if not done cautiously.
+	 * of this number can lead to validation errors, if not done cautiously.
 	 * 
 	 * @return          		String.
 	 */

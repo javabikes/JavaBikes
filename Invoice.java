@@ -148,13 +148,13 @@ public class Invoice {
 		Path workingDir = Paths.get("").toAbsolutePath();
 		String timeInvoice = Long.toString(System.currentTimeMillis() / 1000L);
 		String fileName = timeInvoice + "_JB_" + myCustomer.getDocument() + ".txt";
-		BufferedWriter bw = new BufferedWriter(new FileWriter(workingDir + "/javabikes/" + fileName));
+		String fullFilePath = workingDir + "/javabikes/" + fileName;
+		BufferedWriter bw = new BufferedWriter(new FileWriter(fullFilePath));		
 		bw.write(invoice);
 		bw.close();
 		System.out.println("\n\n\n\tThank you! Your invoice is displayed above.");
-		System.out.println("\tIt was also saved in this file: " + fileName);
+		System.out.println("\tIt was also saved to this file: " + fileName);
+		System.out.println("\n\tFull file path: " + fullFilePath);
 	}
 }
-
-
 

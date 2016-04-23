@@ -37,7 +37,6 @@ public class Booking {
 		Boolean electricOrNot;
 		ArrayList<?> allBikes = null;
 		int bikeID;
-		Boolean confirmation; 
 
 		// print a thank you message
 		System.out.println("\n\tTHANK YOU!\n");
@@ -121,31 +120,49 @@ public class Booking {
 			return true;
 		}
 	}
+	
+	
+	/**
+	 * This method is called after the user chose between normal bikes
+	 * and electric bikes. Depending on the <code>selectType()</code> result, 
+	 * it will call the <code>printBikes()</code> method only with the <code>
+	 * arrayBikes</code> parameter, or it will overload that method with the
+	 * result of <code>whichType()</code>. For more details on <code>selectType()</code>,
+	 * <code>printBikes()</code> and <code>whichType()</code> methods, see 
+	 * their detailed description. 
+	 * 
+	 * @param arrayBikes 		an ArrayList of generic objects: it uses the ?
+	 * 							notation, so any ArrayList is accepted. This is 
+	 * 							done in order to be able to pass to this method
+	 * 							both an ArrayList of <code>Bike</code> objects 
+	 * 							and an ArrayList of <code>ElectricBike</code> 
+	 * 							objects.
+	 */
+	public static void bikeBrowser(ArrayList<?> arrayBikes) {
+		if (selectType()) {
+			printBikes(arrayBikes, whichType());
+		} else {
+			printBikes(arrayBikes);
+		}
+	}
+	
 
 	/**
 	 * This methods asks the user if he/she wants to 
-	 * continue to browse the bike's database, or if he/she
-	 * already chose a bike and can move on, to book it. 
+	 * confirm the choice, or if he/she wants to browse the
+	 * bikes' database again. It returns <code>true</code> or <code>
+	 * false</code>, depending on the user's wishes. It can
+	 * also terminate the program, if the user wants so. 
 	 * <br>
 	 * <br>
 	 * The input can be: 
-	 * <ul><li>"yes": input accepted, it will lead to 
-	 * the execution of the first <code>case</code> statement in
-	 * the <code>switch</code> block.</li>
-	 * <li>"quit": input accepted, it will lead to the
-	 * execution of the second <code>case</code> statement in
-	 * the <code>switch</code> block.</li>
-	 * <li>null: also accepted, it will lead to the execution of
-	 * the <code>default</code> statement in the 
-	 * <code>switch</code> block.</li>
-	 * <li>any other input: not accepted, the user will have
-	 * to re-enter something</li></ul>
+	 * <ul><li>"yes": input accepted, the method will return
+	 * true. </li>
+	 * <li>"quit": input accepted, the program will exit.</li>
+	 * <li>"no": input accepted, the method will return false
+	 * and the user will browse the bikes' database again.</li></ul>
 	 * <br>
 	 * <br>
-	 * This method returns <code>true</code> or <code>
-	 * false</code>, depending on the user's wishes. It can
-	 * also terminate the program, if the user wants to. 
-	 * 
 	 * @return Boolean				a Boolean value, that is true if the 
 	 * 								user wants to continue to browse
 	 * 								the bikes' catalog, otherwise it will
@@ -162,7 +179,7 @@ public class Booking {
 		do {
 			System.out.print("\t  ----> ");
 			choice = input.nextLine();
-		} while (!choice.equals("yes") && !choice.equals("quit") && choice == null);
+		} while (!choice.equals("yes") && !choice.equals("quit") && !choice.equals("no"));
 
 		switch (choice) {
 		case "yes": 
@@ -170,6 +187,8 @@ public class Booking {
 		case "quit": 
 			System.out.println("\tWe hope to see you again! Bye :)");
 			System.exit(0);
+		case "no": 
+			return false;
 		default: 
 			return false;
 		}
@@ -287,31 +306,6 @@ public class Booking {
 			tmpId += 1;
 		}
 		return arrayBikes;
-	}
-
-
-	/**
-	 * This method is called after the user chose between normal bikes
-	 * and electric bikes. Depending on the <code>selectType()</code> result, 
-	 * it will call the <code>printBikes()</code> method only with the <code>
-	 * arrayBikes</code> parameter, or it will overload that method with the
-	 * result of <code>whichType()</code>. For more details on <code>selectType()</code>,
-	 * <code>printBikes()</code> and <code>whichType()</code> methods, see 
-	 * their detailed description. 
-	 * 
-	 * @param arrayBikes 		an ArrayList of generic objects: it uses the ?
-	 * 							notation, so any ArrayList is accepted. This is 
-	 * 							done in order to be able to pass to this method
-	 * 							both an ArrayList of <code>Bike</code> objects 
-	 * 							and an ArrayList of <code>ElectricBike</code> 
-	 * 							objects.
-	 */
-	public static void bikeBrowser(ArrayList<?> arrayBikes) {
-		if (selectType()) {
-			printBikes(arrayBikes, whichType());
-		} else {
-			printBikes(arrayBikes);
-		}
 	}
 
 
@@ -580,40 +574,6 @@ public class Booking {
 		} while (!inputOk);
 		return ID;
 	}
-
-
-	/**
-	 * This method asks the user for an active confirm of his/her choices.
-	 * 
-	 * The input can be: 
-	 * <ul>
-	 * <li>"yes": input accepted, the customer confirmed the previous choice</li>
-	 * <li>"no": input accepted, the customer did not confirm the previous choice</li>
-	 * <li>any other input: not accepted, the user will have
-	 * to re-enter something ("yes" or "no")</li>
-	 * </ul>
-	 * 
-	 * @return userBoolean 				a Boolean value, it will be true if the 
-	 * 									user confirmed the previous choice; 
-	 * 									otherwise it will be false. 
-	 */
-	//	public static Boolean confirmed() {
-	//		String userInput;
-	//		Boolean userBoolean;
-	//		Scanner input = new Scanner(System.in);
-	//		System.out.println("\n\t> Do you confirm your choice? Enter \"yes\" or \"no\": ");
-	//		do {
-	//			System.out.print("\t    ----> ");
-	//			userInput = input.nextLine().toLowerCase();
-	//		} while (!(userInput.equals("yes")) && !(userInput.equals("no")));	
-	//
-	//		if (userInput.matches("yes")) {
-	//			userBoolean = true;
-	//		} else {
-	//			userBoolean = false;
-	//		};
-	//		return userBoolean;
-	//	}
 
 
 	/**
