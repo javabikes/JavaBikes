@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class CreditCard {
 
+
 	/**
 	 * Number of the credit card. It is saved as a 
 	 * String, since it is easier to manipulate.
@@ -47,6 +48,7 @@ public class CreditCard {
 		cvvCode = inputCvvCode(); 
 	} 
 
+
 	/** 
 	 * Getter method, it gives back the card's number.
 	 * 
@@ -55,6 +57,7 @@ public class CreditCard {
 	public String getNumber() {
 		return number;
 	}
+
 
 	/** 
 	 * Custom getter method, it gives back the last four
@@ -66,6 +69,7 @@ public class CreditCard {
 		return number.substring(number.length()-4);
 	}
 
+
 	/** 
 	 * Getter method, it gives back the card's expiry
 	 * date. 
@@ -75,6 +79,7 @@ public class CreditCard {
 	public String getExpiryDate() {
 		return expiryDate;
 	}
+
 
 	/** 
 	 * Getter method, it gives back the card's CVV
@@ -112,16 +117,16 @@ public class CreditCard {
 	private String inputNumber() {
 		Scanner input = new Scanner(System.in);
 		String cardNumber;
+
 		do {
-			do {
-				System.out.print("\t  * Card Number ----> ");
-				cardNumber = input.nextLine();
-				if (cardNumber.equals("quit")) {
-					System.out.println("\tWe hope to see you again! Bye :)");
-					System.exit(0);
-				}
-			} while (!cardNumber.matches("\\d{16}") && !cardNumber.matches("\\d{13}") && !cardNumber.matches("\\d{19}"));
+			System.out.print("\t  * Card Number ----> ");
+			cardNumber = input.nextLine();
+			if (cardNumber.equals("quit")) {
+				System.out.println("\tWe hope to see you again! Bye :)");
+				System.exit(0);
+			}
 		} while(!checkCardNumber(cardNumber));
+
 		return cardNumber;
 	}
 
@@ -170,6 +175,7 @@ public class CreditCard {
 		Calendar c = Calendar.getInstance();
 		int yearToday = c.get(Calendar.YEAR);
 		int monthToday = c.get(Calendar.MONTH);
+
 		do {
 			do {
 				System.out.print("\t  * Expiry Date ----> ");
@@ -179,9 +185,11 @@ public class CreditCard {
 					System.exit(0);
 				}
 			} while (!expDate.matches("\\d{2}/\\d{4}"));
+
 			month = Integer.parseInt(expDate.substring(0, 2));
 			year = Integer.parseInt(expDate.substring(3, 7));
 			validMonth = month <= 12 && month >= 0;
+
 			if (year > yearToday && validMonth) {
 				dateChecker = true;
 			} else if (year == yearToday && month > monthToday && validMonth) {
@@ -192,8 +200,10 @@ public class CreditCard {
 				System.out.println("\t    >> Attention: this credit card is expired.");
 			}		
 		} while (!(dateChecker));
+
 		return expDate;
 	}
+
 
 	/** 
 	 * This methods prompts the user to enter the CVV code of 
@@ -214,6 +224,7 @@ public class CreditCard {
 	private String inputCvvCode() {
 		String cvvCode;
 		Scanner input = new Scanner(System.in);
+
 		do {
 			System.out.print("\t  * CVV Code -------> ");
 			cvvCode = input.nextLine();
@@ -222,8 +233,10 @@ public class CreditCard {
 				System.exit(0);
 			}
 		} while (!cvvCode.matches("\\d{3}"));
+
 		return cvvCode;
 	}
+
 
 	/** 
 	 * This methods fakes the payment. It just prints out 
@@ -241,6 +254,7 @@ public class CreditCard {
 	public void makePayment() {
 		System.out.println("\n\t>> We are processing your payment, please wait. <<");
 		System.out.print("\t   Loading..  [");
+
 		for (int i = 0; i < 31; i++) {
 			System.out.print("=");
 			try {
@@ -250,6 +264,7 @@ public class CreditCard {
 				System.exit(0);
 			} 
 		}
+
 		System.out.println("]  OK!\n");
 	}
 
@@ -323,6 +338,7 @@ public class CreditCard {
 			}
 		}
 		validNumber = (sumOdd + sumEven) % 10 == 0;
+
 		if (cardNumber.startsWith("4")) {
 			if (cardNumber.length() == 13 || 
 					cardNumber.length() == 16 ||
@@ -335,6 +351,7 @@ public class CreditCard {
 				validVisaOrMc = true;
 			}
 		}
+
 		return validNumber && validVisaOrMc;
 	}
 

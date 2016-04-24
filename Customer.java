@@ -1,35 +1,39 @@
 package javabikes;
+
 import java.util.Scanner;
+
 /**
  * This class represents a customer of the 
  * JavaBikes self-service rental bike system. 
  */
 public class Customer { 
+
 	/**
 	 * Name of the customer.
 	 */
 	private String name;
-	
+
 	/**
 	 * Surname of the customer.
 	 */
 	private String surname;
-	
+
 	/**
 	 * Number of the customer's document.
 	 */
 	private String document;
-	
+
 	/**
 	 * Indicates whether the customer resides in Denmark or not.
 	 */
 	private Boolean isDanish;
-	
+
 	/**
 	 * E-mail address of the customer, useful for sending the invoice
 	 * or for reaching out in case of issues. 
 	 */
 	private String email;
+
 
 	/** 
 	 * Contructor of the <code>Customer</code> object. This constructor
@@ -44,6 +48,7 @@ public class Customer {
 		email = inputEmail();
 	} 
 
+
 	/** 
 	 * Getter method, it gives back the customer's name.
 	 * 
@@ -53,6 +58,7 @@ public class Customer {
 		return name;
 	}
 
+
 	/** 
 	 * Getter method, it gives back the customer's surname.
 	 * 
@@ -61,6 +67,7 @@ public class Customer {
 	public String getSurname() {
 		return surname;
 	}
+
 
 	/** 
 	 * Getter method, it gives back the customer's document code. 
@@ -74,6 +81,7 @@ public class Customer {
 		return document;
 	}
 
+
 	/** 
 	 * Getter method, it return <code>true</code> if the customer
 	 * is resident in Denmark, otherwise it will give back <code>false</code>.
@@ -83,8 +91,8 @@ public class Customer {
 	public Boolean getIsDanish() {
 		return isDanish;
 	}
-	
-	
+
+
 	/** 
 	 * Getter method, it gives back the customer's e-mail address.
 	 * 
@@ -93,6 +101,7 @@ public class Customer {
 	public String getEmail() {
 		return email;
 	}
+
 
 	/** 
 	 * This method prompts the user to enter his/her name.
@@ -107,12 +116,15 @@ public class Customer {
 	private String inputName() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("\t> Enter your first name: ");
+
 		do {
 			System.out.print("\t  ----> ");
 			name = input.nextLine();
 		} while (name.length() == 0);
+
 		return name;
 	}
+
 
 	/** 
 	 * This method prompts the user to enter his/her surname.
@@ -127,12 +139,15 @@ public class Customer {
 	private String inputSurname() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("\t> Enter your last name: ");
+
 		do {
 			System.out.print("\t  ----> ");
 			surname = input.nextLine();
 		} while (surname.length() == 0);
+
 		return surname;
 	}
+
 
 	/** 
 	 * This method asks the user if he/she resides in Denmark. This information 
@@ -153,19 +168,21 @@ public class Customer {
 		String danish;
 		Scanner input = new Scanner(System.in);
 		System.out.println("\t> Are you a Danish resident? Enter \"yes\" or \"no\": ");
+
 		do {
 			System.out.print("\t  ----> ");
 			danish = input.nextLine().toLowerCase();
 		} while (!(danish.equals("yes")) && !(danish.equals("no")));	
 
-		// set the boolean variable isDanish to true or false, based on the user's previous answer
 		if (danish.matches("yes")) {
 			isDanish = true;
 		} else {
 			isDanish = false;
 		};
+
 		return isDanish;
 	}
+
 
 	/** 
 	 * This method is used to get the users' document number.
@@ -188,6 +205,7 @@ public class Customer {
 	 */
 	private String inputDocument() {
 		Scanner input = new Scanner(System.in);
+
 		if (isDanish) {
 			System.out.println("\t> Enter your CPR number, in the xxxxxx-yyyy format: ");
 			do {
@@ -201,8 +219,10 @@ public class Customer {
 				document = input.nextLine();
 			} while (!document.matches("[a-zA-Z0-9]+"));
 		}
+
 		return document;
 	}
+
 
 	/** 
 	 * This method is used to get the users' e-mail address. 
@@ -238,10 +258,12 @@ public class Customer {
 	private String inputEmail() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("\t> Enter your email address: ");
+
 		do {
 			System.out.print("\t  ----> ");
 			email = input.nextLine();
 		} while (!email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"));
+
 		return email;
 	}
 } 

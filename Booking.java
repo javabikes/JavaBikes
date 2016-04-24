@@ -31,14 +31,11 @@ public class Booking {
 				+ "\t ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n\n"
 				+ "\t                          WELCOME TO JAVABIKES!\n\n");
 
-		/* create a new Customer object. While doing this, we prompt the user to enter some info 
-		 * such as name, document, email..*/
 		Customer currentCustomer = new Customer();
 		Boolean electricOrNot;
 		ArrayList<?> allBikes = null;
 		int bikeID;
 
-		// print a thank you message
 		System.out.println("\n\tTHANK YOU!\n");
 		System.out.println("\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
@@ -55,14 +52,15 @@ public class Booking {
 		} while (!confirmed());
 
 		Bike currentBike = (Bike)(allBikes.get(bikeID));
+
 		CreditCard currentCard = new CreditCard();
 		askLastConfirm(currentCustomer.getName(), currentCard.getHiddenNumber(), currentBike.getPrice());
 		currentCard.makePayment();
 
 		Invoice currentInvoice = new Invoice(currentBike, currentCustomer, currentCard, electricOrNot);
-
 		currentInvoice.printInvoice();
 		currentInvoice.saveInvoice();
+
 		try {
 			updateBikeDatabase(electricOrNot, bikeID);
 		} catch (IOException ex) {
@@ -106,10 +104,12 @@ public class Booking {
 		System.out.println("\t - Type \"1\" if you want an electric bike.");
 		System.out.println("\t - Type \"2\" if you want a normal bike.");
 		System.out.println("\t - Type \"quit\" to exit the program.");
+
 		do {
 			System.out.print("\t  ----> ");
 			choice = input.nextLine();
 		} while (!choice.equals("1") && !choice.equals("2") && !choice.equals("quit"));
+
 		if (choice.equals("1")) {
 			return true;
 		} else if  (choice.equals("2")) {
@@ -120,8 +120,8 @@ public class Booking {
 			return true;
 		}
 	}
-	
-	
+
+
 	/**
 	 * This method is called after the user chose between normal bikes
 	 * and electric bikes. Depending on the <code>selectType()</code> result, 
@@ -145,7 +145,7 @@ public class Booking {
 			printBikes(arrayBikes);
 		}
 	}
-	
+
 
 	/**
 	 * This methods asks the user if he/she wants to 
@@ -176,6 +176,7 @@ public class Booking {
 		System.out.println("\t - Type \"yes\" if you confirm your choice.");
 		System.out.println("\t - Type \"no\" if you want to browse again the bike's database.");
 		System.out.println("\t - Type \"quit\" to exit the program.");
+
 		do {
 			System.out.print("\t  ----> ");
 			choice = input.nextLine();
@@ -238,6 +239,7 @@ public class Booking {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
 		String line;
 		int tmpId = 0;
+
 		while ((line = reader.readLine()) != null) {
 			String[] values = line.split(",");
 			Bike newBike = new Bike(tmpId, values[0], values[1], 
@@ -245,6 +247,7 @@ public class Booking {
 			arrayBikes.add(newBike); 
 			tmpId += 1;
 		}
+
 		return arrayBikes;
 	}
 
@@ -297,6 +300,7 @@ public class Booking {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
 		String line;
 		int tmpId = 0;
+
 		while ((line = reader.readLine()) != null) {
 			String[] values = line.split(",");		
 			ElectricBike newBike = new ElectricBike(tmpId, values[0], values[1], 
@@ -305,6 +309,7 @@ public class Booking {
 			arrayBikes.add(newBike); 
 			tmpId += 1;
 		}
+
 		return arrayBikes;
 	}
 
@@ -384,10 +389,12 @@ public class Booking {
 		System.out.println("\t - Type \"m\" to select man's bikes.");
 		System.out.println("\t - Type \"w\" to select woman's bikes.");
 		System.out.println("\t - Type \"k\" to select kids' bikes.");
+
 		do {
 			System.out.print("\t  ----> ");
 			choice = input.nextLine();
 		} while (!choice.equals("m") && !choice.equals("w") && !choice.equals("k"));
+
 		return choice;
 	}
 
@@ -424,7 +431,8 @@ public class Booking {
 				if (thisBike.getIsAvailable()) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |  %-6s |  %-7s |\n",
 							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", 
-							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange() + " km.");
+							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", 
+							thisBike.getKmRange() + " km.");
 				}
 			}
 		} else {
@@ -433,7 +441,8 @@ public class Booking {
 				Bike thisBike = (Bike)thisObject;
 				if (thisBike.getIsAvailable()) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |\n",
-							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", thisBike.getBikeTypeString());
+							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", 
+							thisBike.getBikeTypeString());
 				}
 			}
 		}
@@ -471,19 +480,20 @@ public class Booking {
 	 *
 	 */
 	public static void printBikes(ArrayList<?> arrayBikes, String bikeType) {
-	switch(bikeType) {
-	case "m":
-		System.out.printf("\n\n\tAVAILABLE MEN BIKES: \n");	
-		break;
-	case "w": 
-		System.out.printf("\n\n\tAVAILABLE WOMEN BIKES: \n");
-		break;
-	case "k":
-		System.out.printf("\n\n\tAVAILABLE KIDS BIKES: \n");		
-		break;
-	default:
-		System.out.printf("\n\n\tAVAILABLE BIKES: \n");		
-	}
+		switch(bikeType) {
+		case "m":
+			System.out.printf("\n\n\tAVAILABLE MEN BIKES: \n");	
+			break;
+		case "w": 
+			System.out.printf("\n\n\tAVAILABLE WOMEN BIKES: \n");
+			break;
+		case "k":
+			System.out.printf("\n\n\tAVAILABLE KIDS BIKES: \n");		
+			break;
+		default:
+			System.out.printf("\n\n\tAVAILABLE BIKES: \n");		
+		}
+
 		if (arrayBikes.get(0) instanceof ElectricBike) {
 			System.out.printf("\t  | %-2s | %-7s | %-6s | %-9s | %-7s | %-8s |\n", "ID", "Color", "Price", "Bike type", "Battery", "KM Range");
 			for (Object thisObject : arrayBikes) {
@@ -491,7 +501,8 @@ public class Booking {
 				if (thisBike.getIsAvailable() && thisBike.getBikeType().equals(bikeType)) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |  %-6s |  %-7s |\n",
 							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", 
-							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %", thisBike.getKmRange() + " km.");
+							thisBike.getBikeTypeString(), thisBike.getBatteryLevel() + " %",
+							thisBike.getKmRange() + " km.");
 				}
 			}
 		} else {
@@ -500,7 +511,8 @@ public class Booking {
 				Bike thisBike = (Bike)thisObject;
 				if (thisBike.getIsAvailable() && thisBike.getBikeType().equals(bikeType)) {
 					System.out.printf("\t  | %-2d | %-7s | %6s | %-9s |\n",
-							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.", thisBike.getBikeTypeString());
+							thisBike.getBikeId(), thisBike.getColor(), thisBike.getPrice() + " kr.",
+							thisBike.getBikeTypeString());
 				}
 			}
 		}
@@ -552,6 +564,7 @@ public class Booking {
 		Boolean inputOk = false;
 		System.out.println("\n\t> Which bike do you want to book? Insert its ID.");
 		System.out.print("\t  ----> ");
+
 		do {
 			try {
 				Scanner input = new Scanner(System.in);
@@ -572,6 +585,7 @@ public class Booking {
 				continue;
 			}
 		} while (!inputOk);
+
 		return ID;
 	}
 
@@ -604,6 +618,7 @@ public class Booking {
 		System.out.println("\t  - Type \"quit\" to cancel it.");
 		System.out.println("\t  - Press enter to continue.");
 		System.out.print("\t    ----> ");
+
 		if (input.nextLine().equals("quit")) {
 			System.out.println("\tWe hope to see you again! Bye :)");
 			System.exit(0);
@@ -644,6 +659,7 @@ public class Booking {
 	public static void updateBikeDatabase(Boolean electricOrNot, int bikeID) throws IOException {
 		Path workingDirectory = Paths.get("").toAbsolutePath();
 		String dbFile;
+
 		if (electricOrNot) {
 			dbFile = "electricbikes.txt";
 		} else {

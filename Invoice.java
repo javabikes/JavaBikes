@@ -20,26 +20,26 @@ public class Invoice {
 	 * The invoice itself. 
 	 */
 	private String invoice;
-	
+
 	/**
 	 * The current date in which the invoice
 	 * is created. 
 	 */
 	private String DateString; 
-	
+
 	/**
 	 * The current time in which the invoice
 	 * is created. 
 	 */
 	private String TimeString;
-	
+
 	/**
 	 * The customer that is associated with 
 	 * an invoice. 
 	 */
 	private Customer myCustomer;
 
-	
+
 	/**
 	 * Constructor of the <code>Invoice</code> object. It
 	 * just creates a long string which is the invoice itself,
@@ -69,22 +69,21 @@ public class Invoice {
 		myCustomer = currentCustomer;
 		invoice = "";
 		String electricText; 
+
 		if (electricOrNot) {
 			electricText = "yes";
 		} else {
 			electricText = "no";
 		}
 
-		// Get date and format it
 		DateFormat dateformat  = new SimpleDateFormat ("yyyy-MM-dd");
 		Date date = new Date();
 		DateString = dateformat.format(date);
 
-		// Get time and format it
 		DateFormat timeformat  = new SimpleDateFormat ("HH-mm-ss");
 		Date time = new Date();
 		TimeString = timeformat.format(time);
-		
+
 		invoice += "         ---------------------------------------------\n";
 		invoice += "                    >  WELCOME TO JAVABIKES  <  \n";
 		invoice += "         ---------------------------------------------\n\n";
@@ -115,6 +114,7 @@ public class Invoice {
 		invoice += "         ---------------------------------------------\n";
 	}
 
+
 	/** 
 	 * Getter method, it gives back the invoice.
 	 * 
@@ -123,8 +123,8 @@ public class Invoice {
 	public String getInvoice() {
 		return invoice;
 	}
-	
-	
+
+
 	/**
 	 * This method prints out the invoice. The first line is 
 	 * needed to "scale up" all the previous console's output.
@@ -133,7 +133,8 @@ public class Invoice {
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		System.out.println(invoice);
 	}
-	
+
+
 	/**
 	 * This method saves the invoice to a file. The name of the 
 	 * file is standardized: 
@@ -149,9 +150,11 @@ public class Invoice {
 		String timeInvoice = Long.toString(System.currentTimeMillis() / 1000L);
 		String fileName = timeInvoice + "_JB_" + myCustomer.getDocument() + ".txt";
 		String fullFilePath = workingDir + "/javabikes/" + fileName;
+
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fullFilePath));		
 		bw.write(invoice);
 		bw.close();
+
 		System.out.println("\n\n\n\tThank you! Your invoice is displayed above.");
 		System.out.println("\tIt was also saved to this file: " + fileName);
 		System.out.println("\n\tFull file path: " + fullFilePath);
